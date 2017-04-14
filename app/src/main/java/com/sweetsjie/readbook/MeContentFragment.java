@@ -44,9 +44,19 @@ public class MeContentFragment extends Fragment{
         gview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
                 switch (position){
                     case  0:
-                        Intent intent = new Intent(view.getContext(), CollectBook.class);
+                        intent = new Intent(view.getContext(), CollectBook.class);
+                        startActivityForResult(intent, 0);
+                        break;
+
+                    case  2:
+                        intent = new Intent(view.getContext(), RegisterAccount.class);
+                        startActivityForResult(intent, 0);
+                        break;
+                    case  3:
+                        intent = new Intent(view.getContext(), ChangePassword.class);
                         startActivityForResult(intent, 0);
                         break;
                     default:break;

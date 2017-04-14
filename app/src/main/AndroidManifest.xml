@@ -27,6 +27,9 @@
         <activity android:name=".ListAllFileActivity"/>
         <activity android:name=".ViewFile"/>
         <activity android:name=".CollectBook"/>
+        <activity android:name=".RegisterAccount"/>
+        <activity android:name=".ChangePassword"/>
+        <activity android:name=".AccountCancel"/>
     </application>
 
 </manifest>
