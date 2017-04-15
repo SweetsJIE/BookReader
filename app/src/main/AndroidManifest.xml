@@ -30,6 +30,7 @@
         <activity android:name=".RegisterAccount"/>
         <activity android:name=".ChangePassword"/>
         <activity android:name=".AccountCancel"/>
+        <activity android:name=".LoginUser"/>
     </application>
 
 </manifest>

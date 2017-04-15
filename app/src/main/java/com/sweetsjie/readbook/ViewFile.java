@@ -22,10 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-/*
- * �ı������ͼ
- �� �˵� ���л����ֱ���
- */
+
 
 public class ViewFile extends Activity {
 	
@@ -64,7 +61,6 @@ public class ViewFile extends Activity {
 		} catch (Exception e) {}
 	}
 	
-	//���������MENU�˵�
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = this.getMenuInflater();
@@ -73,8 +69,6 @@ public class ViewFile extends Activity {
 	}
 
 
-	//MENU�˵�����  switch case���
-	//���� reCodeAndShow(...)���±��벢��ʾ
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -94,7 +88,6 @@ public class ViewFile extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	//���±��벢����ʾ
 	private void reCodeAndShow(String code)
 	{
 		TextView tv = (TextView) findViewById(R.id.bookContent);
@@ -102,14 +95,12 @@ public class ViewFile extends Activity {
 		tv.setText(fileString);
 	}
 	
-	//���ļ��õ��ַ���
 	public String getStringFromFile(String code)
 	{
 		try {
 			StringBuffer sBuffer = new StringBuffer();
 			FileInputStream fInputStream = new FileInputStream(fileNameString);
 			
-			//java.io.InputStreamReader ֱ�ӽ�������Ϊ���������ڲ���������
 			InputStreamReader inputStreamReader = new InputStreamReader(fInputStream, code);
 			BufferedReader in = new BufferedReader(inputStreamReader);
 			if(!new File(fileNameString).exists())
@@ -127,7 +118,6 @@ public class ViewFile extends Activity {
 		return null;
 	}
 	
-	//������ı��⣬���ݵ�����
 	private void doAbout() {
 		
 		Dialog dialog = new AlertDialog.Builder(ViewFile.this)
@@ -140,7 +130,6 @@ public class ViewFile extends Activity {
 		
 		dialog.show();
 	}
-	//��ť����:  ������ת (Activity)  û��Я����������
 	class OpenFileAction implements View.OnClickListener
 	{
         private View view;

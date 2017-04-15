@@ -35,11 +35,9 @@ public class ListAllFileActivity extends ListActivity {
 		fill(f);
 	}
 
-	//��ȡ�ļ��б�,������listView
 	private void fill(File[] files) {
 		fileList = new ArrayList<File>();
 		
-		//�ļ��б����
 		for (File file : files) {
 			if (isValidFileOrDir(file)) {
 				fileList.add(file);
@@ -48,20 +46,16 @@ public class ListAllFileActivity extends ListActivity {
 		ArrayAdapter<String> fileNameList = new ArrayAdapter<String>(this,
 					android.R.layout.simple_list_item_1,
 					fileToStrArr(fileList)  );
-		
-		//����ListActivity����ķ��� 
-		//ͬsetContentView��Activity�����е�����
+
 		setListAdapter(fileNameList);
 	}
 	
-	//����Ƿ�Ϊ�Ϸ����ļ����������Ƿ�Ϊ·��
 	private boolean isValidFileOrDir(File fileIn)
 	{
 		if (fileIn.isDirectory()) {
 			return true;
 		}
 		else {
-			//���ļ�����ΪСд���´������ַ���
 			String fileNameLow = fileIn.getName().toLowerCase();
 			if (fileNameLow.endsWith(".txt")) {
 				return true;
@@ -69,10 +63,7 @@ public class ListAllFileActivity extends ListActivity {
 		}
 		return false;
 	}
-	
 
-	//��һ���ļ�����ת�����������ֹ��ɵ������� �����б�
-	//�õ� getName()�õ��ļ��� 
 	private String[] fileToStrArr(List<File> fl)
 	{
 		ArrayList<String> fnList = new ArrayList<String>();
@@ -83,21 +74,17 @@ public class ListAllFileActivity extends ListActivity {
 		}
 		return fnList.toArray(new String[0]);
 	}
-	
-	//�б������Ķ���
-	//1.������ļ��� �����û�ͼ �����ļ���
-	//2.������ļ� ������� ��ת��Ļ(Activity)
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
 		HomeContentFragment homeContentFragment = new HomeContentFragment();
 
-		//positionΪ������ڵ�λ�� ����������ȡ�ö�Ӧ�ļ�
 		File file = fileList.get(position);
 		if (file.isDirectory())
 		{
 			File[] f = file.listFiles();
-			fill(f);  // �ػ��ļ��б� ���µ��ļ���
+			fill(f);
 		}
 		else {
 			mydatabaseHelper = new MydatabaseHelper(this,"book.db",null,1);
@@ -110,15 +97,6 @@ public class ListAllFileActivity extends ListActivity {
 			Intent intent = new Intent();
 			intent.setClass(ListAllFileActivity.this, MainActivity.class);
 			intent.putExtra("refresh",true);
-//			bundle = new Bundle();
-//			bundle.putString(fileNameKey, file.getAbsolutePath());
-//			intent.putExtras(bundle);
-			//homeContentFragment.NAME=homeContentFragment.addBookName(homeContentFragment.NAME,nameString);
-			//homeContentFragment.refreshGridView();
-			//Log.d("TAG",fileNameKey);
-			//Log.d("TAG",nameString);
-			//Log.d("TAG",file.getAbsolutePath());
-			///storage/emulated/0/yysdk/��ȿռ�.txt
 			startActivity(intent);
 		}
 	}

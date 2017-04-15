@@ -29,7 +29,6 @@
             android:layout_alignBottom="@+id/imageView"
             android:layout_alignTop="@+id/imageView"
             android:gravity="center"
-            android:text="Admin"
             android:textSize="35sp" />
 
         <ImageView

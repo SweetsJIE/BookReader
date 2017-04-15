@@ -2,6 +2,7 @@ package com.sweetsjie.readbook;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,11 @@ public class RegisterAccount extends Activity{
     private EditText passwordText;
     private Button registerButton;
     private MydatabaseHelper mydatabaseHelper;
+    public static String NAME[]=new String[100];
+    public static String URL[]=new String[100];
+    //public static String[] NAME={"1","2"};
+    private int i;
+    private boolean isSaved=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,16 +45,42 @@ public class RegisterAccount extends Activity{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentValues values = new ContentValues();
-                values.put("account",accountText.getText().toString());
-                values.put("password",passwordText.getText().toString());
-                db.insert("user",null,values);
-                Toast.makeText(RegisterAccount.this,"注册成功",Toast.LENGTH_SHORT).show();
-                finish();
+
+                i=0;
+                String name = accountText.getText().toString();
+                mydatabaseHelper = new MydatabaseHelper(RegisterAccount.this,"book.db",null,1);
+                mydatabaseHelper.getWritableDatabase();
+                final SQLiteDatabase db = mydatabaseHelper.getWritableDatabase();
+                Cursor cursor = db.query("user", null, null, null, null, null, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        String buf= cursor.getString((cursor.getColumnIndex("account")));
+                        if (buf.equals(name)){
+                            isSaved = true;
+                            break;
+                        }
+                        i++;
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+
+
+                if (isSaved){
+                    Toast.makeText(RegisterAccount.this,"账号已注册",Toast.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    ContentValues values = new ContentValues();
+                    values.put("account",accountText.getText().toString());
+                    values.put("password",passwordText.getText().toString());
+                    db.insert("user",null,values);
+                    Toast.makeText(RegisterAccount.this,"注册成功",Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+
             }
         });
-
-
-
     }
+
+
 }
