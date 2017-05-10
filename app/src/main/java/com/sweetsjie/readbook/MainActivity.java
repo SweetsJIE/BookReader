@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setDefaultFragment();
     }
 
+
     //BottomNavigationButtom监听事件
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
